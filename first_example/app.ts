@@ -1,6 +1,9 @@
-/**
- * name
- */
+interface Human
+{
+    setAge(age: number):number;
+    sayHi():void;
+}
+
 abstract class Person 
 {
     firstName: string;
@@ -20,16 +23,17 @@ abstract class Person
         this.fullName = this.firstName + " " + this.lastName;
     }
 
-    public setAge(age: number)
+    protected setAge(age: number):number
     {
         this.age = age;
+        return age;
     }
 
     abstract getAge():number;
     abstract sayHi():void;
 }
 
-class Hello extends Person 
+class HelloOldPerson extends Person implements Human
 {
     helloWorld() 
     {
@@ -45,8 +49,16 @@ class Hello extends Person
     {
         return this.age;
     }
+
+    setAge(age: number):number
+    {
+        var newAge:number = super.setAge(age);
+        this.age = newAge * 2;
+
+        return newAge;
+    }
 }
 
-var example: Hello = new Hello("Artem", "Zakholodylo");
+var example: Human = new HelloOldPerson("Artem", "Zakholodylo");
 example.setAge(24);
 example.sayHi();
