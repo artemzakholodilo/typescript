@@ -15,6 +15,7 @@ interface Human extends Individual
 abstract class Person implements Human 
 {
     fullName: string;
+    age: number;
 
     constructor(public name:string, public lastName:string) 
     {
@@ -64,6 +65,6 @@ class HelloOldPerson extends Person
     }
 }
 
-var example: Person = new HelloOldPerson("Artem", "Zakholodylo");
+var example: Human = new HelloOldPerson("Artem", "Zakholodylo");
 example.setAge(24);
 example.sayHi();
