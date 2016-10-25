@@ -1,64 +1,69 @@
-interface Human
+interface Individual
 {
-    setAge(age: number):number;
-    sayHi():void;
+    name: string;
+    age: number;    
 }
 
-abstract class Person 
+interface Human extends Individual
 {
-    firstName: string;
     lastName: string;
+
+    setAge(age: number): number;
+    sayHi(): void;
+}
+
+abstract class Person implements Human 
+{
     fullName: string;
-    age: number;
-    
-    constructor(firstName, lastName) 
+
+    constructor(public name:string, public lastName:string) 
     {
-        this.firstName = firstName;
+        this.name = name;
         this.lastName = lastName;
         this.setFullName();
     }
 
     protected setFullName() 
     {
-        this.fullName = this.firstName + " " + this.lastName;
+        this.fullName = this.name + " " + this.lastName;
     }
 
-    protected setAge(age: number):number
+    setAge(age: number): number 
     {
         this.age = age;
         return age;
     }
 
-    abstract getAge():number;
-    abstract sayHi():void;
+    abstract getAge(): number;
+    abstract sayHi(): void;
 }
 
-class HelloOldPerson extends Person implements Human
+class HelloOldPerson extends Person 
 {
     helloWorld() 
     {
         console.log("Hello world!");
     }
 
-    sayHi():void
+    sayHi(): void 
     {
         console.log("Hi " + this.fullName + "! Your age is " + this.getAge());
     }
 
-    getAge():number
+    getAge(): number 
     {
         return this.age;
     }
 
-    setAge(age: number):number
+    setAge(age: number): number 
     {
-        var newAge:number = super.setAge(age);
+        var newAge: number = super.setAge(age);
         this.age = newAge * 2;
 
         return newAge;
     }
 }
 
-var example: Human = new HelloOldPerson("Artem", "Zakholodylo");
+var example: Person = new HelloOldPerson("Artem", "Zakholodylo");
 example.setAge(24);
 example.sayHi();
