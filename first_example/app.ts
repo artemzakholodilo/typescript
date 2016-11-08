@@ -16,6 +16,7 @@ abstract class Person implements Human
 {
     fullName: string;
     age: number;
+    person: Array<string> = ["bla", "foo"];
 
     constructor(public name:string, public lastName:string) 
     {
@@ -48,7 +49,10 @@ class HelloOldPerson extends Person
 
     sayHi(): void 
     {
-        console.log("Hi " + this.fullName + "! Your age is " + this.getAge());
+        var nameToUpper = (name: string) => {
+            return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+        };
+        console.log("Hi " + nameToUpper(this.fullName) + "! Your age is " + this.getAge());
     }
 
     getAge(): number 
@@ -65,6 +69,6 @@ class HelloOldPerson extends Person
     }
 }
 
-var example: Human = new HelloOldPerson("Artem", "Zakholodylo");
+var example: Human = new HelloOldPerson("artem", "zakholodylo");
 example.setAge(24);
 example.sayHi();

@@ -7,6 +7,7 @@ var Person = (function () {
     function Person(name, lastName) {
         this.name = name;
         this.lastName = lastName;
+        this.person = ["bla", "foo"];
         this.name = name;
         this.lastName = lastName;
         this.setFullName();
@@ -29,7 +30,10 @@ var HelloOldPerson = (function (_super) {
         console.log("Hello world!");
     };
     HelloOldPerson.prototype.sayHi = function () {
-        console.log("Hi " + this.fullName + "! Your age is " + this.getAge());
+        var nameToUpper = function (name) {
+            return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+        };
+        console.log("Hi " + nameToUpper(this.fullName) + "! Your age is " + this.getAge());
     };
     HelloOldPerson.prototype.getAge = function () {
         return this.age;
@@ -41,6 +45,6 @@ var HelloOldPerson = (function (_super) {
     };
     return HelloOldPerson;
 }(Person));
-var example = new HelloOldPerson("Artem", "Zakholodylo");
+var example = new HelloOldPerson("artem", "zakholodylo");
 example.setAge(24);
 example.sayHi();
